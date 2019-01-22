@@ -1,16 +1,16 @@
 package com.company;
-//WESH COMMENTAIRE MARCHE STP GOGO
+
 
 public class Piece {
 
     private int x;
     private int y ;
-    private String id;
+    String id;
 
     public Piece(int x, int y, String id) {
         this.x = x;
         this.y = y;
-        this.id = id;
+        this.id = ' ';
     }
 
     public int getX() {
