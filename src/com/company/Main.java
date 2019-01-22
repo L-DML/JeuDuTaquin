@@ -7,41 +7,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-        int pTaille = 3; // correspond à la longueur/largeur du carré
-
-
-        /** pieces : ArrayList de ArrayList */
-
-        ArrayList<ArrayList<String>>  pieces = new ArrayList<ArrayList<String>>(pTaille) ;
+        Plateau pieces = new Plateau();
 
         /** On crée pTaille ArrayList **/
 
-        ArrayList<String> l0 = new ArrayList<String>();
-        l0.add("A");
-        l0.add("B");
-        l0.add("C");
-        pieces.add(l0);
+      pieces.creerPlateau();
+      pieces.afficherPlateau();
 
 
-        ArrayList<String> l1 = new ArrayList<String>();
-        l1.add("D");
-        l1.add("E");
-        l1.add("F");
-        pieces.add(l1);
-
-        ArrayList<String> l2 = new ArrayList<String>();
-        l2.add("G");
-        l2.add("H");
-        l2.add(" ");
-        pieces.add(l2);
-
-        for (int i = 0; i < pieces.size(); i++) {
-            for (int j = 0; j < pieces.get(i).size(); j++) {
-                System.out.print(pieces.get(i).get(j) + " ");
-            }
-            System.out.println();
-        }
 
         // List<ArrayList<Piece>> pieces = new ArrayList<ArrayList<Piece>>(); *
 
