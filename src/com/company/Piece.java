@@ -10,7 +10,7 @@ public class Piece {
     public Piece(int x, int y, String id) {
         this.x = x;
         this.y = y;
-        this.id = ' ';
+        this.id = " ";
     }
 
     public int getX() {

@@ -19,7 +19,9 @@ public class Plateau extends Piece {
             Piece piece = new Piece(i, )
         }*/
 
-        Piece p1 = new Piece ();
+        Piece p1 = new Piece (0,0, "A");
+        Piece p2 = new Piece(0, 1, "B");
+        Piece p3 = new Piece(0,2, "C");
     }
 
     List<List<piece>>pieces = new ArrayList<List<piece>>();
