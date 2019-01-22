@@ -1,6 +1,6 @@
 package com.company;
 
-public class Plateau extends Partie {
+public class Plateau extends Jeu {
 
 
     int pX ;

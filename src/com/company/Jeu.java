@@ -15,4 +15,8 @@ public class Jeu {
     public void setNbPartie(int nbPartie) {
         this.nbPartie = nbPartie;
     }
+
+    public void newPartie(){
+
+    }
 }
