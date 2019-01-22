@@ -1,40 +1,29 @@
 package com.company;
 
-public class Plateau extends Jeu {
+import java.util.ArrayList;
+
+public class Plateau extends Piece {
+
+    private int pTaille; // correspond à la longueur/largeur du carré
 
 
-    int pX ;
-    int pY ;
-    int pLongueur;
 
-    public Plateau(int nbPartie, int pX, int pY, int pLongueur) {
-        super(nbPartie);
-        this.pX = pX;
-        this.pY = pY;
-        this.pLongueur = pLongueur;
+    public Plateau(int x, int y, String id, int pTaille) {
+        super(x, y, id);
+        this.pTaille = pTaille;
     }
 
-    public int getpX() {
-        return pX;
+    public void créerPlateau( int pTaille ,int x ,int y ,String id){
+
+        /*for( int i=0 ; i < pTaille-1 ; i++) {
+            Piece piece = new Piece(i, )
+        }*/
+
+        Piece p1 = new Piece (0,0, "A");
+        Piece p2 = new Piece(0, 1, "B");
+        Piece p3 = new Piece(0,2, "C");
     }
 
-    public void setpX(int pX) {
-        this.pX = pX;
-    }
+    List<List<piece>>pieces = new ArrayList<List<piece>>();
 
-    public int getpY() {
-        return pY;
-    }
-
-    public void setpY(int pY) {
-        this.pY = pY;
-    }
-
-    public int getpLongueur() {
-        return pLongueur;
-    }
-
-    public void setpLongueur(int pLongueur) {
-        this.pLongueur = pLongueur;
-    }
 }
