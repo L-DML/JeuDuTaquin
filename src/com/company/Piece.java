@@ -4,13 +4,13 @@ package com.company;
 public class Piece {
 
     private int x;
-    private int y ;
-    String id;
+    private int y;
+    private int id;
 
-    public Piece(int x, int y, String id) {
+    public Piece(int x, int y, int id) {
         this.x = x;
         this.y = y;
-        this.id = " ";
+        this.id = id;
     }
 
     public int getX() {
@@ -29,11 +29,20 @@ public class Piece {
         this.y = y;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Piece{" +
+                "x=" + x +
+                ", y=" + y +
+                ", id=" + id +
+                '}';
     }
 }

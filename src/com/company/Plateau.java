@@ -1,123 +1,110 @@
 package com.company;
 
-import javafx.scene.Scene;
-
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
-public class Plateau  {
-
-
-    int pTaille = 3; // correspond à la longueur/largeur du carré
+public class Plateau {
 
 
-    /** pieces : ArrayList de ArrayList */
-
-    ArrayList<ArrayList<String>> pieces = new ArrayList<ArrayList<String>>(pTaille);
-
-    /** Methode Création Plateau **/
-
-    public void creerPlateau(){
+    private int taille; // correspond à la longueur/largeur du carré
 
 
-        ArrayList<String> l0 = new ArrayList<String>();
-        l0.add("A");
-        l0.add("B");
-        l0.add("C");
-        pieces.add(l0);
+    /**
+     * pieces : ArrayList de ArrayList
+     */
 
+    ArrayList<ArrayList<Piece>> pieces = new ArrayList<ArrayList<Piece>>(taille);
 
-        ArrayList<String> l1 = new ArrayList<String>();
-        l1.add("D");
-        l1.add("E");
-        l1.add("F");
-        pieces.add(l1);
+    /**
+     * Methode Création Plateau
+     **/
 
-        ArrayList<String> l2 = new ArrayList<String>();
-        l2.add("G");
-        l2.add("H");
-        l2.add(" ");
-        pieces.add(l2);
+    public Plateau(int taille) {
+        this.taille = taille;
 
-    }
+        this.pieces = new ArrayList<>();
 
-    /** Méthode Afficher le plateau **/
+        for (int i = 0; i < this.taille; i++) {
+            this.pieces.add(new ArrayList<>());
 
-    public void afficherPlateau(){
-
-        for (int i = 0; i < pieces.size(); i++) {
-            for (int j = 0; j < pieces.get(i).size(); j++) {
-                System.out.print(pieces.get(i).get(j) + " ");
+            for (int j = 0; j < this.taille; j++) {
+                this.pieces.get(i).add(new Piece(j, i, j + this.taille * i));
             }
-            System.out.println();
         }
-    }
-
-
-
-    // List<ArrayList<Piece>> pieces ;
-
-
-    /* public Plateau(int pTaille) {
-
-        this.pTaille = pTaille;
-
-        pieces = new ArrayList<ArrayList<Piece>>();
-
-    } */
-/*
-    public void ajouter(Piece p){
-        pieces.get(0).add(p);
 
     }
-*/
+
+    public int getTaille() {
+        return this.taille;
+    }
+
+    public int getNbCases() {
+        return (int) Math.pow(this.taille, 2);
+    }
+
+    public int[] getCoordCaseVide() {
+        for (int i = 0; i < this.taille; i++) {
+            for (int j = 0; j < this.taille; j++) {
+                if (this.pieces.get(i).get(j).getId() == this.getNbCases() - 1) {
+                    int[] res = {j, i};
+                    return res;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean coordLegale(int x, int y) {
+        return x > 0 && x < this.taille && y > 0 && y < this.taille;
+    }
+
+    public boolean deplacerPiece(int x, int y) {
+        int[] coordCaseVide = this.getCoordCaseVide();
+        int caseVideX = coordCaseVide[0];
+        int caseVideY = coordCaseVide[1];
+
+        if (this.coordLegale(x, y) && !(x == caseVideX && y == caseVideY)) {
+            if (x == caseVideX && (caseVideY - y == -1 || caseVideY - y == 1)) {
+                Piece tmp = this.pieces.get(y).get(x);
+
+                this.pieces.get(y).set(x, this.pieces.get(caseVideY).get(caseVideX));
+                this.pieces.get(caseVideY).set(caseVideX, tmp);
+
+                return true;
+            } else if (y == caseVideY && (caseVideX - x == -1 || caseVideX - x == 1)) {
+                Collections.swap(this.pieces.get(y), caseVideX, x);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Melange du plateau
+     */
+    public void melangePiece(int x, int y){
 
 
-   /* public void creerPlateau( int pTaille ,int x ,int y ,String id){
 
-        for( int i=0 ; i < pTaille-1 ; i++) {
-            Piece piece = new Piece(i, )
-        }*/
+    }
 
-
-    // List<ArrayList<Piece>> pieces = new ArrayList<ArrayList<Piece>>(); *
-
-        /*Plateau plateau = new Plateau(4);
-
-        Piece p1 = new Piece (0,0, "A");
-        Piece p2 = new Piece(0, 1, "B");
-        Piece p3 = new Piece(0,2, "C");
-        Piece p4 = new Piece (1, 0, "D");
-        Piece p5 = new Piece(1,1, "E");
-        Piece p6 = new Piece(1,2, "F");
-        Piece p7 = new Piece(2, 0, "G");
-        Piece p8 = new Piece(2,1, "H");
-        Piece p9 = new Piece(2,2, " ");*/
-
-       /* plateau.ajouter(p1);
-        plateau.ajouter(p2);
-        plateau.ajouter(p3);
-        plateau.ajouter(p4);
-        plateau.ajouter(p5);
-        plateau.ajouter(p6);
-        plateau.ajouter(p7);
-        plateau.ajouter(p8);
-        plateau.ajouter(p9);*/
-
-
-        /*pieces.add(new ArrayList<Piece>());
-
-        pieces.get(0).add(p1);
-        pieces.get(0).add(p2);
-        pieces.get(0).add(p3);
-        pieces.get(1).add(p4);
-        pieces.get(1).add(p5);
-        pieces.get(1).add(p6);
-        pieces.get(2).add(p7);
-        pieces.get(2).add(p8);
-        pieces.get(2).add(p9);
-
-        System.out.println(plateau);*/
-
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.taille; i++) {
+            for (int j = 0; j < this.taille; j++) {
+                int pId = this.pieces.get(i).get(j).getId();
+                if (pId == this.getNbCases() - 1) {
+                    sb.append("#");
+                } else {
+                    sb.append(pId);
+                }
+                if (j < this.taille - 1) {
+                    sb.append(",");
+                }
+            }
+            if (i < this.taille - 1) sb.append("\n");
+        }
+        return sb.toString();
+    }
 }

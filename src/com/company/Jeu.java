@@ -2,7 +2,7 @@ package com.company;
 
 public class Jeu {
 
-    private int nbPartie ;
+    private int nbPartie;
 
     public Jeu(int nbPartie) {
         this.nbPartie = nbPartie;
@@ -16,7 +16,7 @@ public class Jeu {
         this.nbPartie = nbPartie;
     }
 
-    public void newPartie(){
+    public void newPartie() {
 
     }
 }
