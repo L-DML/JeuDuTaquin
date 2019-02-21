@@ -14,7 +14,7 @@ public class Main {
                 System.out.println("Résultat " + resultat.pieces.get(i).get(j).getId());
                 if (plateau.pieces.get(i).get(j).getId() != resultat.pieces.get(i).get(j).getId()){
                     validTaquin = false;
-                    System.out.println("Ya une couille");
+                    System.out.println("Le plateau n'est pas gagnant");
                     break;
                 }
             }
@@ -90,10 +90,24 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Plateau plateau = new Plateau(3);
-        Plateau resultat = new Plateau(3);
+
+        System.out.println("Veuillez choisir une taille ");
+        Scanner sc = new Scanner(System.in);
+        int taille = sc.nextInt();
+
+        Plateau plateau = new Plateau(taille);
+        Plateau resultat = new Plateau(taille);
+
 
         System.out.println(plateau);
+        System.out.println("\n");
+        System.out.println(plateau.getCoordCaseVide()[0] + ", " + plateau.getCoordCaseVide()[1]);
+        System.out.println("\n");
+        plateau.melangePiece(500);
+        System.out.println(plateau);
+
+
+        /*
         System.out.println("Case vide : " + plateau.getCoordCaseVide()[0] + ", " + plateau.getCoordCaseVide()[1]);
         System.out.println("Déplacement valide 1.2: " + plateau.deplacerPiece(1, 2));
         System.out.println(plateau);
@@ -113,6 +127,7 @@ public class Main {
         System.out.println("Déplacement valide 2.0: " + plateau.deplacerPiece(2, 0));
         System.out.println(plateau);
         System.out.println("Case vide : " + plateau.getCoordCaseVide()[0] + ", " + plateau.getCoordCaseVide()[1]);
+        */
 
         int score = requestCommand(plateau, resultat);
         System.out.println("Votre score est de : " + score);

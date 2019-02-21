@@ -81,11 +81,19 @@ public class Plateau {
     /**
      * Melange du plateau
      */
-    public void melangePiece(int x, int y){
+    public void melangePiece(int k) {
 
+        for (int i = 0; i < k; i++) {
 
+            int x = (int) (Math.random() * (this.taille - 0)); //x
 
+            int y = (int) (Math.random() * (this.taille - 0)); //y
+           // System.out.println(x + " " + y);
+
+            this.deplacerPiece(x, y );
+        }
     }
+
 
     @Override
     public String toString() {
