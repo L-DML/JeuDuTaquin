@@ -31,7 +31,6 @@ public class Plateau {
                 this.pieces.get(i).add(new Piece(j, i, j + this.taille * i));
             }
         }
-
     }
 
     public int getTaille() {
@@ -55,7 +54,7 @@ public class Plateau {
     }
 
     public boolean coordLegale(int x, int y) {
-        return x > 0 && x < this.taille && y > 0 && y < this.taille;
+        return x >= 0 && x < this.taille && y >= 0 && y < this.taille;
     }
 
     public boolean deplacerPiece(int x, int y) {
