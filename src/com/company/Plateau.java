@@ -10,15 +10,14 @@ public class Plateau {
 
 
     /**
-     * pieces : ArrayList de ArrayList
+     * Appelle notre Class Piece et crée une ArrayList de ArrayList de pieces
      */
-
     ArrayList<ArrayList<Piece>> pieces = new ArrayList<ArrayList<Piece>>(taille);
 
-    /**
-     * Methode Création Plateau
-     **/
 
+    /**
+     * Création du plateau
+     **/
     public Plateau(int taille) {
         this.taille = taille;
 
@@ -33,14 +32,26 @@ public class Plateau {
         }
     }
 
+    /**
+     * Récupérer la taille du plateau
+     * @return int taille
+     */
     public int getTaille() {
         return this.taille;
     }
 
+    /**
+     * Récupérer le nombre de case
+     * @return int nombre de cases
+     */
     public int getNbCases() {
         return (int) Math.pow(this.taille, 2);
     }
 
+    /**
+     * Récupérer les coordonnées de la case vide
+     * @return tableau d'entier correspondant aux coordonnées de la case vide [x , y]
+     */
     public int[] getCoordCaseVide() {
         for (int i = 0; i < this.taille; i++) {
             for (int j = 0; j < this.taille; j++) {
@@ -53,10 +64,23 @@ public class Plateau {
         return null;
     }
 
+    /**
+     * Vérifier la validité des coordonnées de la case arrivé d'un déplacement
+     * @param x
+     * @param y
+     * @return boolean vérifiant si les coordonnées sont légale
+     */
     public boolean coordLegale(int x, int y) {
+
         return x >= 0 && x < this.taille && y >= 0 && y < this.taille;
     }
 
+    /**
+     * Deplacer la pièce
+     * @param x
+     * @param y
+     * @return boolean vérifiant si le déplacement à était validé
+     */
     public boolean deplacerPiece(int x, int y) {
         int[] coordCaseVide = this.getCoordCaseVide();
         int caseVideX = coordCaseVide[0];
@@ -79,18 +103,18 @@ public class Plateau {
     }
 
     /**
-     * Melange du plateau
+     * Melanger le plateau
+     * @param k nombre de fois ou le plateau est mélangé
      */
     public void melangePiece(int k) {
 
         for (int i = 0; i < k; i++) {
 
             int x = (int) (Math.random() * (this.taille - 0)); //x
-
             int y = (int) (Math.random() * (this.taille - 0)); //y
            // System.out.println(x + " " + y);
 
-            this.deplacerPiece(x, y );
+            this.deplacerPiece(x, y);
         }
     }
 
