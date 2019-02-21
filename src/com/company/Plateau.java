@@ -1,49 +1,110 @@
 package com.company;
 
-import javafx.scene.Scene;
-
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
-public class Plateau  {
-
-
-
-    // int pTaille = 3; // correspond à la longueur/largeur du carré
-
-    /** pieces : ArrayList de ArrayList */
-
-   //  ArrayList<ArrayList<Integer>>  pieces = new ArrayList<ArrayList<Integer>>(pTaille) ;
-
-    /** On crée pTaille ArrayList **/
-
-   /* ArrayList<Integer> l1 = new ArrayList<Integer>();
-    l1.add(0,0, "A");*/
+public class Plateau {
 
 
-    // List<ArrayList<Piece>> pieces ;
+    private int taille; // correspond à la longueur/largeur du carré
 
 
-    /* public Plateau(int pTaille) {
+    /**
+     * pieces : ArrayList de ArrayList
+     */
 
-        this.pTaille = pTaille;
+    ArrayList<ArrayList<Piece>> pieces = new ArrayList<ArrayList<Piece>>(taille);
 
-        pieces = new ArrayList<ArrayList<Piece>>();
+    /**
+     * Methode Création Plateau
+     **/
 
-    } */
-/*
-    public void ajouter(Piece p){
-        pieces.get(0).add(p);
+    public Plateau(int taille) {
+        this.taille = taille;
+
+        this.pieces = new ArrayList<>();
+
+        for (int i = 0; i < this.taille; i++) {
+            this.pieces.add(new ArrayList<>());
+
+            for (int j = 0; j < this.taille; j++) {
+                this.pieces.get(i).add(new Piece(j, i, j + this.taille * i));
+            }
+        }
 
     }
-*/
+
+    public int getTaille() {
+        return this.taille;
+    }
+
+    public int getNbCases() {
+        return (int) Math.pow(this.taille, 2);
+    }
+
+    public int[] getCoordCaseVide() {
+        for (int i = 0; i < this.taille; i++) {
+            for (int j = 0; j < this.taille; j++) {
+                if (this.pieces.get(i).get(j).getId() == this.getNbCases() - 1) {
+                    int[] res = {j, i};
+                    return res;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean coordLegale(int x, int y) {
+        return x > 0 && x < this.taille && y > 0 && y < this.taille;
+    }
+
+    public boolean deplacerPiece(int x, int y) {
+        int[] coordCaseVide = this.getCoordCaseVide();
+        int caseVideX = coordCaseVide[0];
+        int caseVideY = coordCaseVide[1];
+
+        if (this.coordLegale(x, y) && !(x == caseVideX && y == caseVideY)) {
+            if (x == caseVideX && (caseVideY - y == -1 || caseVideY - y == 1)) {
+                Piece tmp = this.pieces.get(y).get(x);
+
+                this.pieces.get(y).set(x, this.pieces.get(caseVideY).get(caseVideX));
+                this.pieces.get(caseVideY).set(caseVideX, tmp);
+
+                return true;
+            } else if (y == caseVideY && (caseVideX - x == -1 || caseVideX - x == 1)) {
+                Collections.swap(this.pieces.get(y), caseVideX, x);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Melange du plateau
+     */
+    public void melangePiece(int x, int y){
 
 
-   /* public void creerPlateau( int pTaille ,int x ,int y ,String id){
 
-        for( int i=0 ; i < pTaille-1 ; i++) {
-            Piece piece = new Piece(i, )
-        }*/
+    }
 
-
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.taille; i++) {
+            for (int j = 0; j < this.taille; j++) {
+                int pId = this.pieces.get(i).get(j).getId();
+                if (pId == this.getNbCases() - 1) {
+                    sb.append("#");
+                } else {
+                    sb.append(pId);
+                }
+                if (j < this.taille - 1) {
+                    sb.append(",");
+                }
+            }
+            if (i < this.taille - 1) sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
